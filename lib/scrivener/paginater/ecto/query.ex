@@ -20,11 +20,11 @@ defimpl Scrivener.Paginater, for: Ecto.Query do
     page_number = min(total_pages, page_number)
 
     %Page{
-      page_size: page_size,
-      page_number: page_number,
-      entries: entries(query, repo, page_number, page_size, caller),
-      total_entries: total_entries,
-      total_pages: total_pages
+      # page_size: page_size,
+      # page_number: page_number,
+      query: entries(query, repo, page_number, page_size, caller)
+      # total_entries: total_entries,
+      # total_pages: total_pages
     }
   end
 
@@ -34,7 +34,6 @@ defimpl Scrivener.Paginater, for: Ecto.Query do
     query
     |> limit(^page_size)
     |> offset(^offset)
-    |> repo.all(caller: caller)
   end
 
   defp total_entries(query, repo, caller) do
